@@ -1,0 +1,18 @@
+{
+  "name": "PdfExtractor",
+  "version": "1.0.0",
+  "description": "extract pdfs from pdfdrive.com",
+  "main": "app.js",
+  "author": "Sam Webster",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "inquirer": "^7.3.3",
+    "jsdom": "^16.4.0",
+    "node-fetch": "^2.6.1",
+    "open": "^7.3.1",
+    "puppeteer": "^5.5.0",
+    "puppeteer-extra": "^3.1.16",
+    "puppeteer-extra-plugin-stealth": "^2.6.6"
+  }
+}
