@@ -1,7 +1,6 @@
 const inquirer = require("inquirer");
 const scrapePdfDrive = require("./scrapers/pdfdrive");
 const scrapeZLibrary = require("./scrapers/zlibrary");
-const EbookResource = require("./objects/Resource");
 
 let pdfName = "";
 
@@ -18,8 +17,16 @@ if (!process.argv[2] || process.argv[3]) {
 
 //Scrape pdfdrive for link
 (async () => {
-  const pdfDriveResources = await scrapePdfDrive(pdfName, 2, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36');
-  const zLibraryResources = await scrapeZLibrary(pdfName, 2, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36');
+  const pdfDriveResources = await scrapePdfDrive(
+    pdfName,
+    2,
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36"
+  );
+  const zLibraryResources = await scrapeZLibrary(
+    pdfName,
+    2,
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36"
+  );
   const allResources = [...pdfDriveResources, ...zLibraryResources];
 
   //Keep console running

@@ -631,6 +631,11 @@ fs.realpath@^1.0.0:
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
   integrity sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
 
+get-free-https-proxy@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/get-free-https-proxy/-/get-free-https-proxy-2.0.2.tgz#50c39b2d5983c6833c3439c6764d8818b1129297"
+  integrity sha512-2iXfO4HFsq20zUa2Q7XtPA/HGCxJKksm08L+peTNfEEOH44c59oiZZfxtE8+tB1TgyazLM9g824IVlZhfomUxg==
+
 get-stream@^5.1.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/get-stream/-/get-stream-5.2.0.tgz#4966a1795ee5ace65e706c4b7beb71257d6e22d3"
