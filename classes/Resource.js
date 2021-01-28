@@ -1,11 +1,10 @@
 const open = require("open");
 
 class Resource {
-  constructor(link, fileFormat, source, info) {
+  constructor({ link, fileFormat, source }) {
     this.link = link;
     this.fileFormat = fileFormat;
     this.source = source;
-    this.info = info;
   }
 
   download = function () {
