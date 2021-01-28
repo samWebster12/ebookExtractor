@@ -21,6 +21,7 @@ function inqConsole(allResources) {
     ])
     .then(({ bookChoice }) => {
       if (typeof bookChoice == "string") {
+        console.log("here");
         process.exit();
       } else {
         bookChoice.download();

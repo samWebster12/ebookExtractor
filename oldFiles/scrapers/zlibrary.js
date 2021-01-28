@@ -1,77 +1,81 @@
 const puppeteer = require("puppeteer");
-const EbookResource = require("../../classes/EbookResource");
-const Resource = require("../../classes/Resource");
-const urlEncode = require("../../utils/urlEncode");
+const Resource = require("../objects/Resource");
+const urlEncode = require("../helperFuncs/urlEncode");
 
 const sourceWebsite = "https://1lib.us";
 
-async function scrapeZLibrary(ebookName, userAgent) {
-  return new Promise(async function (resolve, reject) {
+const scrapeZLibrary = async function (ebookName, numOfResults, userAgent) {
+  ebookName = urlEncode(ebookName);
+  const searchLink = `/s/${ebookName}`;
+
+  console.log("ZLibrary Scraper Starting...");
+  const browser = await puppeteer.launch(); //{devtools: true}
+  const page = await browser.newPage();
+  await page.setUserAgent(userAgent);
+  page.setDefaultNavigationTimeout(10000);
+
+  let pdfResources = [];
+  const maxNumOfResults = 5;
+  for (i = 0; i < numOfResults && i < maxNumOfResults; i++) {
+    //Try and catch any error that occur per iteration
     try {
-      //Create search link
-      ebookName = urlEncode(ebookName);
-      const searchLink = `/s/${ebookName}`;
-
-      //---------------------------------------------------------------------------------------------------------------------------------
-      //Launch and set up Puppeteer
-      const browser = await puppeteer.launch(); //{devtools: true}
-      const page = await browser.newPage();
-      await page.setUserAgent(userAgent);
-      page.setDefaultNavigationTimeout(10000);
-
-      //---------------------------------------------------------------------------------------------------------------------------------
       //Do search for ebook title and extract items
+      console.log("Connecting to website...");
       await page.goto(sourceWebsite + searchLink);
+
+      console.log(`Connected. Searching for requested item...`);
       await page.waitForSelector("#searchResultBox");
 
-      let itemLink;
-      let title;
-      let author;
-      let fileFormat;
+      let itemLink = null;
+      let title = null;
+      let author = null;
+      let fileFormat = null;
       itemLink = await page.evaluate(
-        `document.querySelector("#searchResultBox").querySelectorAll(".resItemBox.resItemBoxBooks.exactMatch")[0].querySelector("[itemprop='name'] a").getAttribute("href")`
+        `document.querySelector("#searchResultBox").querySelectorAll(".resItemBox.resItemBoxBooks.exactMatch")[${i}].querySelector("[itemprop='name'] a").getAttribute("href")`
       );
       title = await page.evaluate(
-        `document.querySelector("#searchResultBox").querySelectorAll(".resItemBox.resItemBoxBooks.exactMatch")[0].querySelector("[itemprop='name']").innerText`
+        `document.querySelector("#searchResultBox").querySelectorAll(".resItemBox.resItemBoxBooks.exactMatch")[${i}].querySelector("[itemprop='name']").innerText`
       );
       author = await page.evaluate(
-        `document.querySelector("#searchResultBox").querySelectorAll(".resItemBox.resItemBoxBooks.exactMatch")[0].querySelector("[itemprop='author']").innerText`
+        `document.querySelector("#searchResultBox").querySelectorAll(".resItemBox.resItemBoxBooks.exactMatch")[${i}].querySelector("[itemprop='author']").innerText`
       );
       fileFormat = await page.evaluate(
-        `document.querySelector("#searchResultBox").querySelectorAll(".resItemBox.resItemBoxBooks.exactMatch")[0].querySelector(".bookProperty.property__file .property_value").innerText.split(',')[0]`
+        `document.querySelector("#searchResultBox").querySelectorAll(".resItemBox.resItemBoxBooks.exactMatch")[${i}].querySelector(".bookProperty.property__file .property_value").innerText.split(',')[0]`
       );
 
-      //---------------------------------------------------------------------------------------------------------------------------------
       //Get download link
+      console.log("Item found. Extracting download link...");
+
       await page.goto(sourceWebsite + itemLink, { waitUntil: "networkidle2" });
       const downloadLink = await page.evaluate(
         `document.querySelector('.addDownloadedBook').href`
       );
 
-      //---------------------------------------------------------------------------------------------------------------------------------
-      //Create and return resource
-      const ebookInfo = {
-        link:
-          downloadLink[0] === "/" ? sourceWebsite + downloadLink : downloadLink,
+      const pdfResource = new Resource(
+        downloadLink[0] === "/" ? sourceWebsite + downloadLink : downloadLink,
         fileFormat,
-        source: "zlibrary",
-        title,
-        author,
-        pageCount: -1,
-      };
+        "Zlibrary",
+        { title, author }
+      );
 
-      resolve(new EbookResource(ebookInfo));
-    } catch (error) {
-      reject(error);
+      pdfResources.push(pdfResource);
+      console.log("SUCCESS\n");
+    } catch (e) {
+      console.log(
+        "FAILED. Something went wrong in iteration " +
+          i +
+          "\nError: " +
+          e +
+          "\n"
+      );
+      continue;
     }
-  });
-}
+  }
+  //Close browser and return download link
+  await browser.close();
+  console.log("Done.");
 
-/*COMMENTS
-console.log("ZLibrary Scraper Starting...");
-console.log("Connecting to website...");
-console.log(`Connected. Searching for requested item...`);
-console.log("Item found. Extracting download link...");
-*/
+  return pdfResources;
+};
 
 module.exports = scrapeZLibrary;
