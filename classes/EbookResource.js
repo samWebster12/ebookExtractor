@@ -1,4 +1,4 @@
-const Resource = require("./Resource");
+const Resource = require('./Resource');
 
 class EbookResource extends Resource {
   constructor({ link, fileFormat, source, title, author, pageCount }) {

@@ -1,4 +1,4 @@
-const open = require("open");
+const open = require('open');
 
 class Resource {
   constructor({ link, fileFormat, source }) {

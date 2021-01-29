@@ -1,14 +1,14 @@
-const inquirer = require("inquirer");
-const scrapePdfDrive = require("./scrapers/pdfdrive");
-const scrapeZLibrary = require("./scrapers/zlibrary");
+const inquirer = require('inquirer');
+const scrapePdfDrive = require('./scrapers/pdfdrive');
+const scrapeZLibrary = require('./scrapers/zlibrary');
 
-let pdfName = "";
+let pdfName = '';
 
 //Get pdf name from third console argument
 if (!process.argv[2] || process.argv[3]) {
   console.log(
     `Please provide a single argument for the pdf you are searching for!
-    Wrap your ebook title with double quotation marks if you need to!`
+    Wrap your ebook title with double quotation marks if you need to!`,
   );
   process.exit();
 } else {
@@ -20,12 +20,12 @@ if (!process.argv[2] || process.argv[3]) {
   const pdfDriveResources = await scrapePdfDrive(
     pdfName,
     2,
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36"
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
   );
   const zLibraryResources = await scrapeZLibrary(
     pdfName,
     2,
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36"
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
   );
   const allResources = [...pdfDriveResources, ...zLibraryResources];
 
@@ -33,9 +33,9 @@ if (!process.argv[2] || process.argv[3]) {
   inquirer
     .prompt([
       {
-        type: "list",
-        message: "Select Ebook to Download",
-        name: "bookChoice",
+        type: 'list',
+        message: 'Select Ebook to Download',
+        name: 'bookChoice',
         choices: allResources[0]
           ? allResources.map((resource, index) => {
               return {
@@ -45,11 +45,11 @@ if (!process.argv[2] || process.argv[3]) {
                 value: resource,
               };
             })
-          : ["Nothing Found. Presss Ctrl+C to quit."],
+          : ['Nothing Found. Presss Ctrl+C to quit.'],
       },
     ])
     .then(({ bookChoice }) => {
-      if (typeof bookChoice == "string") {
+      if (typeof bookChoice == 'string') {
         process.exit();
       } else {
         bookChoice.download();
