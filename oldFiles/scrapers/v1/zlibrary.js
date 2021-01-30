@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
-const Resource = require('../objects/Resource');
-const urlEncode = require('../helperFuncs/urlEncode');
+const urlEncode = require('../../../utils/urlEncode');
+const EbookResource = require('../../../classes/EbookResource');
 
 const sourceWebsite = 'https://1lib.us';
 
@@ -51,11 +51,13 @@ const scrapeZLibrary = async function (ebookName, numOfResults, userAgent) {
         `document.querySelector('.addDownloadedBook').href`,
       );
 
-      const pdfResource = new Resource(
+      const pdfResource = new EbookResource(
         downloadLink[0] === '/' ? sourceWebsite + downloadLink : downloadLink,
         fileFormat,
         'Zlibrary',
-        { title, author },
+        title,
+        author,
+        -1,
       );
 
       pdfResources.push(pdfResource);

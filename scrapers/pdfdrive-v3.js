@@ -39,10 +39,14 @@ function scrapePdfDrive(ebookName, headers, bookIndex) {
       await page.goto(sourceWebsite + dlInterfaceLink);
 
       let downloadLink = '';
-      downloadLink = await getDownloadLink(
-        ['.btn.btn-primary.btn-user', '.btn.btn-success.btn-responsive'],
-        page,
-      );
+      try {
+        downloadLink = await getDownloadLink(
+          ['.btn.btn-primary.btn-user', '.btn.btn-success.btn-responsive'],
+          page,
+        );
+      } catch (error) {
+        throw new Error('Couldnt get download link off ' + sourceWebsite);
+      }
 
       browser.close();
 

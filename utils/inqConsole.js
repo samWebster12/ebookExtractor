@@ -5,16 +5,14 @@ function inqConsole(allResources) {
   inquirer
     .prompt([
       {
-        type: 'list',
+        type: 'rawlist',
         message: 'Select Ebook to Download',
         name: 'bookChoice',
         choices: allResources[0]
           ? allResources.map((resource, index) => {
               if (resource instanceof EbookResource) {
                 return {
-                  name: `${index + 1}. ${resource.title} | ${resource.title} ${
-                    resource.author
-                  } `,
+                  name: `${resource.title} | ${resource.author} `,
                   value: resource,
                 };
               }

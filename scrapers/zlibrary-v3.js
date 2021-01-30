@@ -13,19 +13,21 @@ function scrapeZLibrary(ebookName, headers, bookIndex) {
       //Create search link
       ebookName = urlEncode(ebookName);
       const searchLink = `/s/${ebookName}`;
-
       //Do search for ebook title and extract items
       const searchResults = await loadCheerio(
         sourceWebsite + searchLink,
         headers,
       );
 
-      const itemLink = searchResults("[itemprop='name'] a").attr('href');
+      const itemLink = searchResults("[itemprop='name'] a")
+        .eq(bookIndex)
+        .attr('href');
       const title = searchResults("[itemprop='name']").eq(bookIndex).text();
       const author = searchResults("[itemprop='author']").eq(bookIndex).text();
       const fileFormat = searchResults(
         '.bookProperty.property__file .property_value',
       )
+        .eq(bookIndex)
         .text()
         .split(',')[0];
 
@@ -43,7 +45,6 @@ function scrapeZLibrary(ebookName, headers, bookIndex) {
         author,
         pageCount: -1,
       };
-
       //Process strings and trim any unnecessary white space
       Object.keys(ebookInfo).forEach((key) => {
         if (typeof ebookInfo[key] === 'string') {
@@ -54,7 +55,6 @@ function scrapeZLibrary(ebookName, headers, bookIndex) {
       //Return EbookResource with info
       resolve(new EbookResource(ebookInfo));
 
-      //
       //
     } catch (error) {
       console.log('ERROR CATCHER: ' + error);
