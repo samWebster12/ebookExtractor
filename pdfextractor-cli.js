@@ -16,25 +16,23 @@ if (!process.argv[2] || process.argv[3]) {
   pdfName = process.argv[2];
 }
 
+//Run scrapers
 (async function () {
-  const scrapers = [
-    scrapeZLibrary,
-    scrapeZLibrary,
-    scrapeZLibrary,
-    scrapePdfDrive,
-    scrapePdfDrive,
-  ];
+  const scrapers = [scrapeZLibrary, scrapeZLibrary, scrapePdfDrive];
   const headers = {
     'User-Agent':
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36',
   };
 
-  let index = -1;
+  let pdfDriveIndex = -1;
+  let zLibraryIndex = -1;
   const promises = scrapers.map((scraper) => {
-    index++;
-
-    return scraper(pdfName, headers, index).catch((err) => {
-      console.log('error occured');
+    return scraper(
+      pdfName,
+      headers,
+      scraper.name === 'scrapeZLibrary' ? zLibraryIndex++ : pdfDriveIndex++,
+    ).catch((err) => {
+      console.log(err.message);
       return err;
     });
   });
@@ -49,5 +47,5 @@ if (!process.argv[2] || process.argv[3]) {
       });
       inqConsole(newResults);
     })
-    .catch('saw it');
+    .catch('error');
 })();

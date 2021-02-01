@@ -14,10 +14,12 @@ function scrapeZLibrary(ebookName, headers, bookIndex) {
       ebookName = urlEncode(ebookName);
       const searchLink = `/s/${ebookName}`;
       //Do search for ebook title and extract items
-      const searchResults = await loadCheerio(
-        sourceWebsite + searchLink,
-        headers,
-      );
+      let searchResults;
+      try {
+        searchResults = await loadCheerio(sourceWebsite + searchLink, headers);
+      } catch (error) {
+        throw error;
+      }
 
       const itemLink = searchResults("[itemprop='name'] a")
         .eq(bookIndex)
@@ -32,7 +34,12 @@ function scrapeZLibrary(ebookName, headers, bookIndex) {
         .split(',')[0];
 
       //Go to item page and get download link
-      const itemPage = await loadCheerio(sourceWebsite + itemLink, headers);
+      let itemPage;
+      try {
+        itemPage = await loadCheerio(sourceWebsite + itemLink, headers);
+      } catch (error) {
+        throw error;
+      }
       const downloadLink = itemPage('.addDownloadedBook').attr('href');
 
       //Create Resource
@@ -43,7 +50,7 @@ function scrapeZLibrary(ebookName, headers, bookIndex) {
         source: 'zlibrary',
         title,
         author,
-        pageCount: -1,
+        pageCount: undefined,
       };
       //Process strings and trim any unnecessary white space
       Object.keys(ebookInfo).forEach((key) => {
@@ -57,8 +64,17 @@ function scrapeZLibrary(ebookName, headers, bookIndex) {
 
       //
     } catch (error) {
-      console.log('ERROR CATCHER: ' + error);
-      reject(error);
+      if (
+        error.message.split(':') &&
+        (error.message.split(':')[0] === 'NETWORK' ||
+          error.message.split(':')[0] === 'DOWNLOAD LINK' ||
+          error.message.split(':')[0] === 'PUPPETEER SETUP')
+      ) {
+        reject(error);
+      } else {
+        reject(error);
+        //reject(new Error('MISC: something went wrong'));
+      }
     }
   });
 }
