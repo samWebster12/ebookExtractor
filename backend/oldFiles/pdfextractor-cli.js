@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
-const scrapePdfDrive = require('./scrapers/pdfdrive');
-const scrapeZLibrary = require('./scrapers/zlibrary');
+const scrapePdfDrive = require('./scrapers/v2/pdfdrive-v2');
+const scrapeZLibrary = require('./scrapers/v2/zlibrary-v2');
 
 let pdfName = '';
 

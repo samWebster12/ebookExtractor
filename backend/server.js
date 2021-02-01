@@ -1,11 +1,12 @@
 const express = require('express');
+const path = require('path');
 const scrapeZLibrary = require('./scrapers/zlibrary-v3');
 const scrapePdfDrive = require('./scrapers/pdfdrive-v3');
 
 //SETUP
 const PORT = 8080;
 const server = express();
-server.use(express.static('./'));
+server.use(express.static(path.join(__dirname, 'views')));
 server.use(express.json());
 
 //CORS

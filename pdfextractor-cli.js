@@ -1,7 +1,7 @@
-const inqConsole = require('./utils/inqConsole');
-const scrapePdfDrive = require('./scrapers/pdfdrive-v3');
-const scrapeZLibrary = require('./scrapers/zlibrary-v3');
-const EbookResource = require('./classes/EbookResource');
+const inqConsole = require('./backend/utils/inqConsole');
+const scrapePdfDrive = require('./backend/scrapers/pdfdrive-v3');
+const scrapeZLibrary = require('./backend/scrapers/zlibrary-v3');
+const EbookResource = require('./backend/classes/EbookResource');
 
 let pdfName;
 
