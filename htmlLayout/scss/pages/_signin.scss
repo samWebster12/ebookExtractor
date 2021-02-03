@@ -1,0 +1,123 @@
+.body {
+  background: var(--color-grey-light-5);
+  width: 100vw;
+  height: 100vh;
+  font-size: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signin {
+  /*
+  display: grid;
+  align-items: start;
+  justify-items: center;
+  */
+  display: flex;
+  //flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 8rem;
+  width: 57%;
+  height: 30%;
+  margin-bottom: 20rem;
+
+  &__banner {
+    align-self: start;
+    &__heading {
+      font-size: 5rem;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 800;
+      color: var(--color-primary-dark-green);
+    }
+
+    &__subheading {
+      font-size: 2.5rem;
+      font-weight: 400;
+      color: var(--color-grey-dark-2);
+      font-family: var(--font-oswald);
+    }
+  }
+
+  &__form-area {
+    padding: 2rem;
+    width: 40rem;
+    height: 40rem;
+    //height: 100%;
+    background: #fff;
+    border-radius: 1rem;
+    display: grid;
+    grid-template-rows: 7fr 1fr 2fr;
+    justify-items: center;
+    align-items: center;
+    box-shadow: 0 1rem 2rem rgba(#000, 0.2);
+
+    /*
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;*/
+
+    &__form {
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      //   background: var(--color-grey-light-1);
+      width: 90%;
+      height: 100%;
+
+      &__submit {
+        width: 100%;
+        height: calc(3.2rem + 0.2vw);
+        font-size: 2rem;
+      }
+      &__submit:hover {
+        box-shadow: inset 36rem 0 0 0 var(--color-primary-light-green);
+        color: var(--color-grey-dark-4);
+      }
+
+      &__username {
+      }
+
+      &__password {
+      }
+    }
+
+    &__forgot-pw {
+      text-decoration: none;
+      font-family: var(--font-oswald);
+      font-size: 1.6rem;
+      color: var(--color-grey-dark-2);
+      margin-top: 1rem;
+    }
+
+    &__sign-up {
+      width: 10rem;
+      height: calc(2.5rem + 0.5vw);
+      margin-top: 1.2rem;
+      font-size: 1.5rem;
+
+      &:hover {
+        box-shadow: inset 10rem 0 0 0 var(--color-primary-light-green);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .signin {
+    flex-direction: column;
+    width: 75%;
+  }
+
+  .signin__banner {
+    align-self: center;
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+}

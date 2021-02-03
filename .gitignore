@@ -2,6 +2,5 @@ node_modules/
 websites.txt
 yarn-error.log
 notes.txt
-testing/
+backend/testing/
 notes/
-oldFiles/scrapers/placeholder/
