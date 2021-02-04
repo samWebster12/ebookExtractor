@@ -13,15 +13,20 @@ body {
   line-height: 1.3; }
 
 :root {
+  --color-primary-darkest-green: #20ac74;
   --color-primary-dark-green: #28d790;
   --color-primary-light-green: #53dfa6;
+  --color-primary-lightest-green: #7ee7bd;
   --color-grey-light-1: #faf9f9;
   --color-grey-light-2: #f4f2f2;
   --color-grey-light-3: #f0eeee;
   --color-grey-light-4: #ccc;
+  --color-grey-light-5: #f0f2f5;
   --color-grey-dark-1: #333;
   --color-grey-dark-2: #777;
-  --color-grey-dark-3: #999; }
+  --color-grey-dark-3: #999;
+  --font-oswald: 'Oswald', sans-serif;
+  --font-open: 'Open Sans', sans-serif; }
 
 .btn {
   width: 9vw;
@@ -32,56 +37,164 @@ body {
   cursor: pointer;
   color: var(--color-grey-light-2);
   font-size: calc(1rem + 0.5vw);
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--font-open);
   font-weight: 800;
   box-shadow: inset 0 0 0 0 var(--color-primary-light-green);
-  transition: ease-out 150ms;
+  transition: ease-out 100ms;
   outline: none; }
   .btn:hover {
     box-shadow: inset 9vw 0 0 0 var(--color-primary-light-green);
     color: var(--color-grey-dark-4); }
 
-.header {
-  display: grid;
-  grid-template-columns: 5fr 1fr 1fr;
-  align-items: center;
+.input {
+  height: 5rem;
   width: 100%;
-  height: 12vh;
-  border-bottom: 2px solid var(--color-grey-light-2);
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border: 1px solid #cdcdcd;
+  border-radius: 0.3rem;
+  font-size: 1.7rem;
+  outline: none; }
+
+.input:focus,
+.input:active {
+  outline: none;
+  box-shadow: 0 0 5px rgba(221, 221, 221, 0.144); }
+
+.body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--color-grey-light-1); }
-  .header__logo {
-    font-style: none;
-    text-decoration: none;
-    padding-left: 5rem;
-    text-align: center; }
-    .header__logo__text {
-      font-family: 'Open Sans', sans-serif;
-      font-weight: 800;
-      font-size: calc(2.5rem + 1vw);
-      color: var(--color-primary-dark-green);
-      position: relative;
-      width: 35%; }
-      .header__logo__text:before {
-        content: '';
+  .body__main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6rem; }
+
+.search {
+  height: 40rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+  .search__logo {
+    width: 55rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-family: var(--font-open);
+    font-size: 6rem;
+    background: linear-gradient(to right, var(--color-primary-darkest-green), var(--color-primary-lightest-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; }
+    .search__logo__image {
+      width: 6.5rem; }
+  .search__bar-wrapper {
+    width: 100%;
+    position: relative;
+    width: 78rem;
+    height: 4rem;
+    display: flex; }
+    .search__bar-wrapper__bar {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px 0 0 8px;
+      border: 1px solid var(--color-grey-dark-3);
+      outline: none;
+      padding: 1.5rem;
+      padding-right: 10rem;
+      font-size: 1.6rem;
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.2); }
+      .search__bar-wrapper__bar:focus, .search__bar-wrapper__bar:active {
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.2); }
+    .search__bar-wrapper__submit-btn {
+      width: 6rem;
+      border-radius: 0 8px 8px 0;
+      outline: none;
+      border: 1px solid var(--color-grey-dark-3);
+      background-color: var(--color-grey-light-1);
+      cursor: pointer; }
+      .search__bar-wrapper__submit-btn__icon {
         position: absolute;
-        width: 100%;
-        height: 2px;
-        bottom: 0;
-        left: 0;
+        right: 2rem;
+        top: 30%;
+        font-size: 1.7rem;
+        z-index: 1; }
+      .search__bar-wrapper__submit-btn:hover {
         background-color: var(--color-primary-light-green);
-        visibility: hidden;
-        transform: scaleX(0);
-        transition: all 0.15s ease-in-out; }
-      .header__logo__text:hover:before {
-        visibility: visible;
-        transform: scaleX(1); }
-  .header__login-btn {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: stretch; }
-  .header__signup-btn {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: stretch; }
+        color: #fff; }
+
+.results {
+  width: calc(20rem + 45vw);
+  border-radius: 5px;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--color-grey-dark-1);
+  background: #fff; }
+  .results__item {
+    padding: 2rem;
+    width: 100%;
+    border-bottom: 1px solid var(--color-grey-dark-3);
+    color: var(--color-grey-dark-1);
+    display: flex; }
+    .results__item__cover {
+      height: 22rem; }
+    .results__item__main-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      margin-left: 4rem; }
+      .results__item__main-section__heading {
+        width: 100%; }
+        .results__item__main-section__heading__title {
+          font-size: 2.2rem;
+          font-weight: 500; }
+        .results__item__main-section__heading__author {
+          font-size: 1.7rem;
+          font-style: italic;
+          color: var(--color-primary-darkest-green); }
+      .results__item__main-section__info {
+        grid-area: info;
+        font-size: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 7rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem; }
+        .results__item__main-section__info__data {
+          font-weight: 800; }
+      .results__item__main-section__download {
+        grid-area: download;
+        margin-top: 1rem;
+        width: 20rem;
+        height: 5rem; }
+        .results__item__main-section__download__btn {
+          width: 100%;
+          height: 100%;
+          font-size: calc(1.3rem + 0.3vw); }
+          .results__item__main-section__download__btn:hover {
+            box-shadow: inset 20rem 0 0 0 var(--color-primary-light-green); }
+
+@media screen and (max-width: 900px) {
+  html {
+    font-size: 50%; } }
+
+@media screen and (max-width: 750px) {
+  .search__bar-wrapper {
+    width: 60rem; } }
+
+@media screen and (max-width: 550px) {
+  .search__bar-wrapper {
+    width: 50rem; }
+  .search__logo {
+    font-size: 5rem;
+    justify-content: center; }
+  .search__logo__image {
+    width: 5rem;
+    margin-right: 2rem; } }
+
+@media screen and (max-width: 430px) {
+  html {
+    font-size: 42%; } }

@@ -10,10 +10,180 @@
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&family=Oswald&display=swap"
       rel="stylesheet"
     />
+    <script
+      src="https://kit.fontawesome.com/683fd68da5.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Test HTML and CSS</title>
   </head>
-  <body>
-    <header class="header">
+  <body class="body">
+    <main class="body__main">
+      <section class="search">
+        <div class="search__logo">
+          <!--<img
+            src="./images/books.png"
+            alt="books"
+            class="search__logo__image"
+          />-->
+
+          <p>Ebookz Today</p>
+        </div>
+        <div class="search__bar-wrapper">
+          <input
+            type="text"
+            class="search__bar-wrapper__bar"
+            placeholder="Search An Ebook Title"
+          />
+          <button class="search__bar-wrapper__submit-btn">
+            <i class="fas fa-search search__bar-wrapper__submit-btn__icon"></i>
+          </button>
+        </div>
+      </section>
+      <section class="results">
+        <!--FIRST ITEM-->
+        <div class="results__item">
+          <img
+            src="./images/cover2.jpg"
+            alt="book cover"
+            class="results__item__cover"
+          />
+          <div class="results__item__main-section">
+            <div class="results__item__main-section__heading">
+              <p class="results__item__main-section__heading__title">
+                Percy Jackson The Complete Series
+              </p>
+              <p class="results__item__main-section__heading__author">
+                Rick Riordan
+              </p>
+            </div>
+            <div class="results__item__main-section__info">
+              <div class="results__item__main-section__info__filetype">
+                <p>
+                  File:
+                  <span class="results__item__main-section__info__data"
+                    >EPUB</span
+                  >
+                </p>
+              </div>
+              <div class="results__item__main-section__info__source">
+                <p>
+                  Source:
+                  <span class="results__item__main-section__info__data"
+                    >ZLibrary</span
+                  >
+                </p>
+              </div>
+              <div class="results__item__main-section__info__page-count">
+                Pages:
+                <span class="results__item__main-section__info__data">455</span>
+              </div>
+            </div>
+            <div class="results__item__main-section__download">
+              <button class="results__item__main-section__download__btn btn">
+                Download
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!--SECOND ITEM-->
+        <div class="results__item">
+          <img
+            src="./images/cover3.jpg"
+            alt="book cover"
+            class="results__item__cover"
+          />
+          <div class="results__item__main-section">
+            <div class="results__item__main-section__heading">
+              <p class="results__item__main-section__heading__title">
+                Percy Jackson The Complete Series
+              </p>
+              <p class="results__item__main-section__heading__author">
+                Rick Riordan
+              </p>
+            </div>
+            <div class="results__item__main-section__info">
+              <div class="results__item__main-section__info__filetype">
+                <p>
+                  File:
+                  <span class="results__item__main-section__info__data"
+                    >EPUB</span
+                  >
+                </p>
+              </div>
+              <div class="results__item__main-section__info__source">
+                <p>
+                  Source:
+                  <span class="results__item__main-section__info__data"
+                    >ZLibrary</span
+                  >
+                </p>
+              </div>
+              <div class="results__item__main-section__info__page-count">
+                Pages:
+                <span class="results__item__main-section__info__data">455</span>
+              </div>
+            </div>
+            <div class="results__item__main-section__download">
+              <button class="results__item__main-section__download__btn btn">
+                Download
+              </button>
+            </div>
+          </div>
+        </div>
+        <!--THIRD ITEM-->
+        <div class="results__item">
+          <img
+            src="./images/cover.jpg"
+            alt="book cover"
+            class="results__item__cover"
+          />
+          <div class="results__item__main-section">
+            <div class="results__item__main-section__heading">
+              <p class="results__item__main-section__heading__title">
+                Percy Jackson The Complete Series
+              </p>
+              <p class="results__item__main-section__heading__author">
+                Rick Riordan
+              </p>
+            </div>
+            <div class="results__item__main-section__info">
+              <div class="results__item__main-section__info__filetype">
+                <p>
+                  File:
+                  <span class="results__item__main-section__info__data"
+                    >EPUB</span
+                  >
+                </p>
+              </div>
+              <div class="results__item__main-section__info__source">
+                <p>
+                  Source:
+                  <span class="results__item__main-section__info__data"
+                    >ZLibrary</span
+                  >
+                </p>
+              </div>
+              <div class="results__item__main-section__info__page-count">
+                Pages:
+                <span class="results__item__main-section__info__data">455</span>
+              </div>
+            </div>
+            <div class="results__item__main-section__download">
+              <button class="results__item__main-section__download__btn btn">
+                Download
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
+
+<!--HEADER-->
+<!--
+  <header class="header">
       <a href="#" class="header__logo"
         ><p class="header__logo__text">EBOOKZ TODAY</p></a
       >
@@ -24,13 +194,9 @@
         <button class="header__signup-btn__button btn">Sign Up</button>
       </div>
     </header>
+-->
 
-    <main>
-      <div class="search"></div>
-    </main>
-  </body>
-</html>
-
+<!--SOMETHING ELSE-->
 <!--
    <div class="header__logo-box"></div>
     <div class="header__login-form">

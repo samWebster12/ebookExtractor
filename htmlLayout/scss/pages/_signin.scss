@@ -73,7 +73,7 @@
 
       &__submit {
         width: 100%;
-        height: calc(3.2rem + 0.2vw);
+        height: calc(3.7rem + 0.2vw);
         font-size: 2rem;
       }
       &__submit:hover {
@@ -98,7 +98,7 @@
 
     &__sign-up {
       width: 10rem;
-      height: calc(2.5rem + 0.5vw);
+      height: calc(3rem + 0.2vw);
       margin-top: 1.2rem;
       font-size: 1.5rem;
 
@@ -109,7 +109,7 @@
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 950px) {
   .signin {
     flex-direction: column;
     width: 75%;
@@ -120,4 +120,22 @@
     text-align: center;
     margin-bottom: 5rem;
   }
+}
+
+@media screen and (max-width: 500px) {
+  .signin {
+    margin-bottom: 3rem;
+  }
+  .signin__form-area {
+    width: 30rem;
+  }
+
+  /*
+  .signin__form-area__form__username {
+    width: 27rem;
+  }
+
+  .signin__form-area__form__password {
+    width: 27rem;
+  }*/
 }

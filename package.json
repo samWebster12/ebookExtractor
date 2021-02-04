@@ -6,7 +6,7 @@
   "author": "Sam Webster",
   "license": "MIT",
   "scripts": {
-    "scss": "node-sass htmlLayout/scss/signin.scss htmlLayout/css/signin.css -w"
+    "scss": "node-sass htmlLayout/scss/search.scss htmlLayout/css/search.css -w"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.5",
