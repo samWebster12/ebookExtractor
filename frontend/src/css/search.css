@@ -154,6 +154,8 @@
   width: 20rem;
   height: 100%;
   font-size: calc(1.3rem + 0.3vw);
+  text-decoration: none;
+  padding: 1rem 1.5rem 1rem 1.5rem;
 }
 
 .results__item__main-section__download__btn:hover {
@@ -163,24 +165,26 @@
 .username {
   position: absolute;
   top: 3rem;
-  right: 6rem;
+  right: calc(1rem + 1vw);
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  display: grid;
+  justify-content: center;
+  /* display: grid;
   align-items: center;
   justify-items: center;
   grid-template-columns: 5fr 1fr;
-  grid-column-gap: 8px;
-  width: calc(15rem + 0.4vw);
+  /*grid-column-gap: 8px;*/
+  /* width: calc(15rem + 0.4vw);*/
   color: var(--color-grey-dark-1);
   cursor: pointer;
 }
 .username__name {
+  justify-self: end;
   font-size: calc(1.3rem + 0.4vw);
+  margin-right: 1.2rem;
 }
 .username__dd-arrow {
-  font-size: calc(1.4rem + 0.3vw);
+  font-size: calc(1.2rem + 0.3vw);
 }
 
 .drop-down {
