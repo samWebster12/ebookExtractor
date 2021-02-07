@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import getToken from '../utils/getToken';
-import '../css/signin.css';
 
+import '../css/base.css';
+import '../css/signin.css';
 function Signin({ setUsername }) {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();

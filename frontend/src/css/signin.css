@@ -120,7 +120,7 @@
 }
 
 @media screen and (max-width: 500px) {
-  html {
+  .signin---body {
     font-size: 60%;
   }
 }

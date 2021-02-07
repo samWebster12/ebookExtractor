@@ -1,5 +1,6 @@
 import React from 'react';
 import verifyToken from '../utils/verifyToken';
+import '../css/base.css';
 import '../css/search.css';
 import logo from '../images/logo2.png';
 import nocover from '../images/nocover.jpg';
@@ -104,86 +105,86 @@ class Search extends React.Component {
             </form>
           </section>
           <section className="results">
-            <div class="results__item">
-              <img src={nocover} class="results__item__cover" />
-              <div class="results__item__main-section">
-                <div class="results__item__main-section__heading">
-                  <p class="results__item__main-section__heading__title">
+            <div className="results__item">
+              <img src={nocover} className="results__item__cover" />
+              <div className="results__item__main-section">
+                <div className="results__item__main-section__heading">
+                  <p className="results__item__main-section__heading__title">
                     Percy Jackson The Complete Series
                   </p>
-                  <p class="results__item__main-section__heading__author">
+                  <p className="results__item__main-section__heading__author">
                     Rick Riordan
                   </p>
                 </div>
-                <div class="results__item__main-section__info">
-                  <div class="results__item__main-section__info__filetype">
+                <div className="results__item__main-section__info">
+                  <div className="results__item__main-section__info__filetype">
                     <p>
                       File:
-                      <span class="results__item__main-section__info__data">
+                      <span className="results__item__main-section__info__data">
                         EPUB
                       </span>
                     </p>
                   </div>
-                  <div class="results__item__main-section__info__source">
+                  <div className="results__item__main-section__info__source">
                     <p>
                       Source:
-                      <span class="results__item__main-section__info__data">
+                      <span className="results__item__main-section__info__data">
                         ZLibrary
                       </span>
                     </p>
                   </div>
-                  <div class="results__item__main-section__info__page-count">
+                  <div className="results__item__main-section__info__page-count">
                     Pages:
-                    <span class="results__item__main-section__info__data">
+                    <span className="results__item__main-section__info__data">
                       455
                     </span>
                   </div>
                 </div>
-                <div class="results__item__main-section__download">
-                  <button class="results__item__main-section__download__btn btn">
+                <div className="results__item__main-section__download">
+                  <button className="results__item__main-section__download__btn btn">
                     Download
                   </button>
                 </div>
               </div>
             </div>
 
-            <div class="results__item">
-              <img src={nocover} class="results__item__cover" />
-              <div class="results__item__main-section">
-                <div class="results__item__main-section__heading">
-                  <p class="results__item__main-section__heading__title">
+            <div className="results__item">
+              <img src={nocover} className="results__item__cover" />
+              <div className="results__item__main-section">
+                <div className="results__item__main-section__heading">
+                  <p className="results__item__main-section__heading__title">
                     Percy Jackson The Complete Series
                   </p>
-                  <p class="results__item__main-section__heading__author">
+                  <p className="results__item__main-section__heading__author">
                     Rick Riordan
                   </p>
                 </div>
-                <div class="results__item__main-section__info">
-                  <div class="results__item__main-section__info__filetype">
+                <div className="results__item__main-section__info">
+                  <div className="results__item__main-section__info__filetype">
                     <p>
                       File:
-                      <span class="results__item__main-section__info__data">
+                      <span className="results__item__main-section__info__data">
                         EPUB
                       </span>
                     </p>
                   </div>
-                  <div class="results__item__main-section__info__source">
+                  <div className="results__item__main-section__info__source">
                     <p>
                       Source:
-                      <span class="results__item__main-section__info__data">
+                      <span className="results__item__main-section__info__data">
                         ZLibrary
                       </span>
                     </p>
                   </div>
-                  <div class="results__item__main-section__info__page-count">
+                  <div className="results__item__main-section__info__page-count">
                     Pages:
-                    <span class="results__item__main-section__info__data">
+                    <span className="results__item__main-section__info__data">
                       455
                     </span>
                   </div>
                 </div>
-                <div class="results__item__main-section__download">
-                  <button class="results__item__main-section__download__btn btn">
+                <div className="results__item__main-section__download">
+                  <button className="results__item__main-section__download__btn btn">
                     Download
                   </button>
                 </div>

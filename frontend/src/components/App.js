@@ -3,7 +3,6 @@ import Search from './Search';
 import Signin from './Signin';
 import NotFound from './NotFound';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import '../css/base.css';
 
 function App() {
   let [username, setUsername] = useState();
