@@ -1,71 +1,6 @@
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  box-sizing: border-box;
-  font-size: 62.5%;
-}
-
-body {
-  line-height: 1.3;
-}
-
-:root {
-  --color-primary-darkest-green: #20ac74;
-  --color-primary-dark-green: #28d790;
-  --color-primary-light-green: #53dfa6;
-  --color-primary-lightest-green: #7ee7bd;
-  --color-grey-light-1: #faf9f9;
-  --color-grey-light-2: #f4f2f2;
-  --color-grey-light-3: #f0eeee;
-  --color-grey-light-4: #ccc;
-  --color-grey-light-5: #f0f2f5;
-  --color-grey-dark-1: #333;
-  --color-grey-dark-2: #777;
-  --color-grey-dark-3: #999;
-  --font-oswald: 'Oswald', sans-serif;
-  --font-open: 'Open Sans', sans-serif;
-}
-
-.btn {
-  width: 9vw;
-  height: calc(3rem + 1vw);
-  border: none;
-  background: var(--color-grey-dark-1);
-  border-radius: 0.3rem;
-  cursor: pointer;
-  color: var(--color-grey-light-2);
-  font-size: calc(1rem + 0.5vw);
-  font-family: var(--font-open);
-  font-weight: 800;
-  box-shadow: inset 0 0 0 0 var(--color-primary-light-green);
-  transition: ease-out 100ms;
-  outline: none;
-}
-.btn:hover {
-  box-shadow: inset 9vw 0 0 0 var(--color-primary-light-green);
-  color: var(--color-grey-dark-4);
-}
-
-.input {
-  height: 5rem;
+.root {
   width: 100%;
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  border: 1px solid #cdcdcd;
-  border-radius: 0.3rem;
-  font-size: 1.7rem;
-  outline: none;
-}
-
-.input:focus,
-.input:active {
-  outline: none;
-  box-shadow: 0 0 5px rgba(221, 221, 221, 0.144);
+  height: 100%;
 }
 
 .body {
@@ -73,6 +8,8 @@ body {
   align-items: center;
   justify-content: center;
   background: var(--color-grey-light-1);
+  min-width: 100vw;
+  min-height: 100vh;
 }
 .body__main {
   display: flex;
@@ -84,19 +21,19 @@ body {
 
 .search {
   height: 40rem;
+  width: calc(70rem + 10vw);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 .search__logo {
-  width: 55rem;
   margin-bottom: 2rem;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   font-family: var(--font-open);
-  font-size: 6rem;
+  font-size: calc(5rem + 0.5vw);
   background: var(--color-primary-dark-green);
   background: linear-gradient(
     to right,
@@ -108,14 +45,14 @@ body {
   -webkit-text-fill-color: transparent;
 }
 .search__logo__image {
-  width: 6.5rem;
+  width: 5.5rem;
 }
 .search__bar-wrapper {
-  width: 100%;
   position: relative;
-  width: 78rem;
-  height: 4rem;
+  width: 100%;
+  height: 3.5rem;
   display: flex;
+  align-items: center;
 }
 .search__bar-wrapper__bar {
   width: 100%;
@@ -134,6 +71,7 @@ body {
 }
 .search__bar-wrapper__submit-btn {
   width: 6rem;
+  height: 100%;
   border-radius: 0 8px 8px 0;
   outline: none;
   border: 1px solid var(--color-grey-dark-3);
@@ -142,6 +80,7 @@ body {
 }
 .search__bar-wrapper__submit-btn__icon {
   position: absolute;
+
   right: 2rem;
   top: 30%;
   font-size: 1.7rem;
@@ -209,11 +148,14 @@ body {
   width: 20rem;
   height: 5rem;
 }
+
 .results__item__main-section__download__btn {
-  width: 100%;
+  padding: 1rem;
+  width: 20rem;
   height: 100%;
   font-size: calc(1.3rem + 0.3vw);
 }
+
 .results__item__main-section__download__btn:hover {
   box-shadow: inset 20rem 0 0 0 var(--color-primary-light-green);
 }
@@ -221,10 +163,15 @@ body {
 .username {
   position: absolute;
   top: 3rem;
-  right: 3rem;
+  right: 6rem;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 5fr 1fr;
+  grid-column-gap: 8px;
   width: calc(15rem + 0.4vw);
   color: var(--color-grey-dark-1);
   cursor: pointer;
@@ -271,12 +218,20 @@ body {
   color: var(--color-grey-light-1);
 }
 
+@media screen and (max-width: 1000px) {
+  .search {
+    height: 40rem;
+    width: calc(10rem + 60vw);
+  }
+
+  .search__logo {
+    font-size: calc(2rem + 4vw);
+  }
+}
+
 @media screen and (max-width: 900px) {
   html {
     font-size: 50%;
-  }
-  .search__bar-wrapper {
-    width: 57rem;
   }
   .username {
     width: calc(12rem + 1vw);
@@ -284,9 +239,6 @@ body {
 }
 
 @media screen and (max-width: 750px) {
-  .search__bar-wrapper {
-    width: 60rem;
-  }
   .drop-down {
     width: calc(4rem + 5vw);
   }
@@ -296,12 +248,8 @@ body {
   }
 }
 
-@media screen and (max-width: 550px) {
-  .search__bar-wrapper {
-    width: 50rem;
-  }
+@media screen and (max-width: 600px) {
   .search__logo {
-    font-size: 5rem;
     justify-content: center;
   }
   .search__logo__image {
@@ -312,12 +260,6 @@ body {
 
 @media screen and (max-width: 430px) {
   html {
-    font-size: 42%;
-  }
-  .search__bar-wrapper {
-    width: 40rem;
-  }
-  .search__logo {
-    font-size: 4rem;
+    font-size: 48%;
   }
 }

@@ -1,4 +1,4 @@
-.body {
+.signin---body {
   background: var(--color-grey-light-5);
   width: 100vw;
   height: 100vh;
@@ -8,7 +8,7 @@
   justify-content: center;
 }
 
-.signin {
+.signin---signin {
   /*
   display: grid;
   align-items: start;
@@ -80,12 +80,6 @@
         box-shadow: inset 36rem 0 0 0 var(--color-primary-light-green);
         color: var(--color-grey-dark-4);
       }
-
-      &__username {
-      }
-
-      &__password {
-      }
     }
 
     &__forgot-pw {
@@ -110,12 +104,12 @@
 }
 
 @media screen and (max-width: 950px) {
-  .signin {
+  .signin---signin {
     flex-direction: column;
     width: 75%;
   }
 
-  .signin__banner {
+  .signin---signin__banner {
     align-self: center;
     text-align: center;
     margin-bottom: 5rem;
@@ -123,10 +117,10 @@
 }
 
 @media screen and (max-width: 500px) {
-  .signin {
+  .signin---signin {
     margin-bottom: 3rem;
   }
-  .signin__form-area {
+  .signin---signin__form-area {
     width: 30rem;
   }
 

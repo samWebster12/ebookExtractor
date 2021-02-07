@@ -4,3 +4,4 @@ yarn-error.log
 notes.txt
 backend/testing/
 notes/
+.env

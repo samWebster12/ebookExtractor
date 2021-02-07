@@ -28,6 +28,8 @@
     justify-content: space-evenly;
     font-family: var(--font-open);
     font-size: 6rem;
+    background: var(--color-primary-dark-green);
+
     background: linear-gradient(
       to right,
       var(--color-primary-darkest-green),
@@ -89,12 +91,16 @@
   }
 }
 
+.are-results {
+  border: 1px solid var(--color-grey-dark-1);
+}
+
 .results {
   // <----------------------- Change this later
   width: calc(20rem + 45vw);
   border-radius: 5px;
   box-shadow: 0 1rem 3rem rgba(#000, 0.2);
-  border: 1px solid var(--color-grey-dark-1);
+
   background: #fff; //var(--color-grey-light-1);
   &__item {
     padding: 2rem;
@@ -163,15 +169,91 @@
   }
 }
 
+.username {
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: calc(15rem + 0.4vw);
+  color: var(--color-grey-dark-1);
+  cursor: pointer;
+
+  &__name {
+    font-size: calc(1.3rem + 0.4vw);
+  }
+
+  &__dd-arrow {
+    font-size: calc(1.4rem + 0.3vw);
+  }
+}
+
+.drop-down {
+  position: absolute;
+  top: calc(5rem + 2vw);
+  right: calc(2rem + 1vw);
+  width: calc(5rem + 5vw);
+  background-color: white;
+  box-shadow: 0 0 1rem rgba(#000, 0.1);
+  display: none;
+  flex-direction: column;
+
+  &__item {
+    color: var(--color-grey-dark-1);
+    font-size: calc(0.5vw + 1rem);
+    font-weight: 600;
+    width: 100%;
+    position: relative;
+    text-align: left;
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: white;
+    height: calc(1.2rem + 2vw);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__link {
+      text-decoration: none;
+      // margin-left: calc(0.9rem + 0.2vw);
+    }
+
+    &:hover {
+      background-color: var(--color-primary-dark-green);
+      color: var(--color-grey-light-1);
+    }
+  }
+}
+
 @media screen and (max-width: 900px) {
   html {
     font-size: 50%;
+  }
+
+  .search__bar-wrapper {
+    width: 57rem;
+  }
+
+  .username {
+    width: calc(12rem + 1vw);
   }
 }
 
 @media screen and (max-width: 750px) {
   .search__bar-wrapper {
     width: 60rem;
+  }
+
+  .drop-down {
+    width: calc(4rem + 5vw);
+
+    &__item {
+      font-size: calc(0.3vw + 1rem);
+      height: calc(1rem + 2vw);
+    }
   }
 }
 
@@ -194,5 +276,13 @@
 @media screen and (max-width: 430px) {
   html {
     font-size: 42%;
+  }
+
+  .search__bar-wrapper {
+    width: 40rem;
+  }
+
+  .search__logo {
+    font-size: 4rem;
   }
 }

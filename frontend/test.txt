@@ -1,0 +1,31 @@
+<section className="search">
+            <div className="search__logo">
+              {/*  <img src={logo} className="search__logo__image" />*/}
+
+              <p>Ebookz Today</p>
+            </div>
+            <div class="search__bar-wrapper">
+              <input
+                type="text"
+                class="search__bar-wrapper__bar"
+                placeholder="Search An Ebook Title"
+              />
+              <button class="search__bar-wrapper__submit-btn">
+                <i class="fas fa-search search__bar-wrapper__submit-btn__icon"></i>
+              </button>
+            </div>
+            {/*
+            <form className="search__bar-wrapper">
+              <input
+                type="text"
+                className="search__bar-wrapper__bar"
+                placeholder="Search An Ebook Title"
+              />
+              <input
+                type="submit"
+                className="search__bar-wrapper__submit-btn"
+                value=""
+              />
+              <i className="fas fa-search search__bar-wrapper__submit-btn__icon"></i>
+            </form>*/}
+          </section>
