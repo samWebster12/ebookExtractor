@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import getToken from '../utils/getToken';
 
-import '../css/base.css';
-import '../css/signin.css';
+/*import '../css/base.css';
+import '../css/signin.css';*/
+
+import '../scss/base.scss';
+import '../scss/signin.scss';
+
 function Signin({ setUsername }) {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
@@ -13,6 +17,7 @@ function Signin({ setUsername }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     const token = await getToken({ username, password });
+
     if (token.token) {
       localStorage.setItem('token', token.token);
       setUsername(username);

@@ -4,6 +4,9 @@ import Signin from './Signin';
 import NotFound from './NotFound';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
+//DISABLE THE CONSOLE
+//console.log = console.warn = console.error = () => {};
+
 function App() {
   let [username, setUsername] = useState();
   return (

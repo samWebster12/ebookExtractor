@@ -1,0 +1,15 @@
+.input {
+  height: 5rem;
+  width: 100%;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border: 1px solid #cdcdcd;
+  border-radius: 0.3rem;
+  font-size: 1.7rem;
+  outline: none;
+}
+
+.input:focus,
+.input:active {
+  outline: none;
+  box-shadow: 0 0 5px rgba(221, 221, 221, 0.144);
+}

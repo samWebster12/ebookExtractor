@@ -130,7 +130,6 @@
   color: var(--color-primary-darkest-green);
 }
 .results__item__main-section__info {
-  grid-area: info;
   font-size: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -143,7 +142,6 @@
   font-weight: 800;
 }
 .results__item__main-section__download {
-  grid-area: download;
   margin-top: 1rem;
   width: 20rem;
   height: 5rem;
@@ -169,12 +167,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* display: grid;
-  align-items: center;
-  justify-items: center;
-  grid-template-columns: 5fr 1fr;
-  /*grid-column-gap: 8px;*/
-  /* width: calc(15rem + 0.4vw);*/
   color: var(--color-grey-dark-1);
   cursor: pointer;
 }
@@ -225,7 +217,7 @@
 @media screen and (max-width: 1000px) {
   .search {
     height: 40rem;
-    width: calc(10rem + 60vw);
+    width: calc(20rem + 60vw);
   }
 
   .search__logo {
