@@ -4,6 +4,7 @@ const User = require('../models/user');
 
 async function signInController(req, res) {
   //SET CREDS
+
   const username = req.body.username;
   const password = req.body.password;
   const user = { username, password };
@@ -31,8 +32,7 @@ async function signInController(req, res) {
     if (err) {
       res.status(400).json({ error: 'Failed to create JWT token' });
     }
-
-    res.json({
+    res.status(200).json({
       token,
     });
   });

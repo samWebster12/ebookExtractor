@@ -74,6 +74,13 @@ class Search extends React.Component {
     };
 
     try {
+      this.setState((prevState) => {
+        return {
+          ...prevState,
+          resultsExpected: prevState.resultsExpected + 12,
+        };
+      });
+
       //SEND REQUEST TO SERVER TO GET EBOOKS
       const token = localStorage.getItem('token');
       const response = await fetch('http://192.168.1.15:8080/api/ebooks', {
@@ -84,13 +91,7 @@ class Search extends React.Component {
         },
         body: JSON.stringify(bodyData),
       });
-      this.setState((prevState) => {
-        return {
-          ...prevState,
 
-          resultsExpected: prevState.resultsExpected + 8,
-        };
-      });
       const functionKey = this.state.searchKey;
 
       const reader = response.body.getReader();
@@ -140,7 +141,10 @@ class Search extends React.Component {
 
           //Limit title letter count
           const maxLetterCount = Math.round(window.screen.width / 13);
-          if (resourceData.title.length > maxLetterCount) {
+          if (
+            resourceData.title &&
+            resourceData.title.length > maxLetterCount
+          ) {
             resourceData.title =
               resourceData.title.slice(0, maxLetterCount - 1) + '...';
           }
@@ -156,7 +160,6 @@ class Search extends React.Component {
               ...prevState,
               currentResultKey: prevState.currentResultKey + 1,
               results: [...prevState.results, resourceData],
-              loading: false,
               resultsReceived: prevState.resultsReceived + 1,
             };
           });
@@ -191,7 +194,7 @@ class Search extends React.Component {
     document.querySelector('#results').classList.remove('are-results');
     document.querySelector('.see-more').style.display = 'none';
     //Set new search key and init key for this instance of handleSearch function
-    const numberOfResultsWanted = 8;
+    const numberOfResultsWanted = 12;
 
     this.setState((prevState) => {
       return {
@@ -200,8 +203,8 @@ class Search extends React.Component {
         prevSearch: search,
         currentBookIndex: 0,
         results: [],
-
-        resultsExpected: prevState.resultsExpected + 8,
+        resultsReceived: 0,
+        resultsExpected: numberOfResultsWanted,
       };
     });
 
@@ -209,7 +212,7 @@ class Search extends React.Component {
     const bodyData = {
       search,
       index: 0,
-      numBooks: Math.round(numberOfResultsWanted / 2),
+      numBooks: Math.round(numberOfResultsWanted / 3),
       code,
     };
 
@@ -277,7 +280,10 @@ class Search extends React.Component {
 
           //Limit title letter count
           const maxLetterCount = Math.round(window.screen.width / 13);
-          if (resourceData.title.length > maxLetterCount) {
+          if (
+            resourceData.title &&
+            resourceData.title.length > maxLetterCount
+          ) {
             resourceData.title =
               resourceData.title.slice(0, maxLetterCount - 1) + '...';
           }

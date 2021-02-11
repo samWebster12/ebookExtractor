@@ -12,10 +12,9 @@ function scrapePdfDrive(ebookName, headers, bookIndex) {
   console.log(headers);*/
   return new Promise(async function (resolve, reject) {
     try {
-      //Create search link
-      ebookName = urlEncode(ebookName);
-      const searchLink = `/search?q=${ebookName}&pagecount=&pubyear=&searchin=&em=`;
+      let searchLink = `/search?q=${ebookName}&pagecount=&pubyear=&searchin=&em=`;
 
+      searchLink = encodeURI(searchLink);
       //Do search for ebook title and extract item link
       let searchResults;
       try {
@@ -24,11 +23,13 @@ function scrapePdfDrive(ebookName, headers, bookIndex) {
         throw error;
       }
 
-      const itemLink = searchResults('.files-new ul li:not(.liad)')
+      let itemLink = searchResults('.files-new ul li:not(.liad)')
         .eq(bookIndex)
         .find('a')
         .attr('href');
 
+      itemLink = encodeURI(itemLink);
+      // console.log('PDF DRIVE ITEM LINK: ' + sourceWebsite + itemLink);
       //Go to item page and get book info
       let itemPage;
       try {
@@ -36,9 +37,28 @@ function scrapePdfDrive(ebookName, headers, bookIndex) {
       } catch (error) {
         throw error;
       }
-      const dlInterfaceLink = itemPage('#download-button-link').attr('href');
+      let dlInterfaceLink = itemPage('#download-button-link').attr('href');
+      dlInterfaceLink = encodeURI(dlInterfaceLink);
       const title = itemPage('.ebook-title').text();
       const author = itemPage('.ebook-author').text();
+      let imgLink;
+      try {
+        imgLink = itemPage('.ebook-img').attr('src');
+      } catch {
+        imgLink =
+          'https://s.pdfdrive.com/assets/thumbs/e30/e30a6d77efd232e46c5c99acc15bdd50.jpg';
+      }
+
+      let pageCount;
+      try {
+        pageCount = itemPage('.info-green').text().split(' ')[0];
+        if (pageCount === '') {
+          pageCount = -1;
+        }
+      } catch (error) {
+        console.log(error);
+        pageCount = -1;
+      }
 
       //Go to download interface (Must use puppeteer here to execute javascript)
       let page;
@@ -67,6 +87,8 @@ function scrapePdfDrive(ebookName, headers, bookIndex) {
         throw new Error('DOWNLOAD LINK: unable to extract download link');
       }
 
+      downloadLink = encodeURI(downloadLink);
+
       browser.close();
 
       //Create Resource
@@ -77,7 +99,8 @@ function scrapePdfDrive(ebookName, headers, bookIndex) {
         source: 'pdfdrive',
         title,
         author,
-        pageCount: undefined,
+        imgLink,
+        pageCount,
       };
 
       //Process strings and trim any unnecessary white space

@@ -1,19 +1,16 @@
-const cheerio = require('cheerio');
-const fetch = require('node-fetch');
 const EbookResource = require('../classes/EbookResource');
-const urlEncode = require('../utils/urlEncode');
 const trimWhiteSpace = require('../utils/trimWhiteSpace');
 const loadCheerio = require('../utils/loadCheerio');
 
-const sourceWebsite = 'https://1lib.us';
+const sourceWebsite = 'http://libgen.li';
 
-function scrapeZLibrary(ebookName, headers, bookIndex) {
+function scrapeLibgen(ebookName, headers, bookIndex) {
   return new Promise(async function (resolve, reject) {
     try {
-      //Create search link
-      let searchLink = `/s/${ebookName}`;
+      //Do search for ebook title and extract item link
+      let searchLink = `/search.php?req=${ebookName}&lg_topic=libgen&open=0&view=simple&res=25&phrase=1&column=def`;
       searchLink = encodeURI(searchLink);
-      //Do search for ebook title and extract items
+
       let searchResults;
       try {
         searchResults = await loadCheerio(sourceWebsite + searchLink, headers);
@@ -21,61 +18,76 @@ function scrapeZLibrary(ebookName, headers, bookIndex) {
         throw error;
       }
 
-      let itemLink = searchResults("[itemprop='name'] a")
-        .eq(bookIndex)
+      let itemLink = searchResults('.c')
+        .find('tr')
+        .eq(bookIndex + 1)
+        .find('td')
+        .eq(2)
+        .find('a')
         .attr('href');
 
       itemLink = encodeURI(itemLink);
-      const title = searchResults("[itemprop='name']").eq(bookIndex).text();
-      const author = searchResults("[itemprop='author']").eq(bookIndex).text();
-      const fileFormat = searchResults(
-        '.bookProperty.property__file .property_value',
-      )
-        .eq(bookIndex)
-        .text()
-        .split(',')[0];
 
-      //Go to item page and get download link
+      //Go to item page and get book data
       let itemPage;
       try {
-        itemPage = await loadCheerio(sourceWebsite + itemLink, headers);
+        itemPage = await loadCheerio(sourceWebsite + '/' + itemLink, headers);
       } catch (error) {
         throw error;
       }
-      let downloadLink = itemPage('.addDownloadedBook').attr('href');
+
+      const title = itemPage('tbody tr').eq(1).find('td').eq(2).text();
+
+      const author = itemPage('tbody tr').eq(2).find('td').eq(1).text();
+
+      const fileFormat = itemPage('tbody tr')
+        .eq(10)
+        .find('td')
+        .eq(3)
+        .text()
+        .toUpperCase();
+
+      const imgLink =
+        sourceWebsite + itemPage('tbody tr').eq(1).find('img').attr('src');
+
+      const pageCount = itemPage('tbody tr')
+        .eq(6)
+        .find('td')
+        .eq(3)
+        .text()
+        .split('\\')[0];
+
+      const dlInterfaceLink = itemPage('tbody tr')
+        .eq(21)
+        .find('a')
+        .attr('href');
+
+      //Go to download interface link and get download link
+      let dlInterface;
+      try {
+        dlInterface = await loadCheerio(
+          sourceWebsite + dlInterfaceLink,
+          headers,
+        );
+      } catch (error) {
+        throw error;
+      }
+
+      let downloadLink = dlInterface('a').attr('href');
       downloadLink = encodeURI(downloadLink);
-
-      let imgLink;
-      try {
-        imgLink = itemPage('img').attr('src');
-      } catch (error) {
-        console.log(error);
-        imgLink =
-          'https://s.pdfdrive.com/assets/thumbs/e30/e30a6d77efd232e46c5c99acc15bdd50.jpg';
-      }
-
-      let pageCount;
-      try {
-        pageCount = itemPage('.property_pages .property_value').text();
-        if (pageCount === '') {
-          pageCount = -1;
-        }
-      } catch (error) {
-        console.log(error);
-        pageCount = -1;
-      }
 
       //Create Resource
       const ebookInfo = {
         link:
           downloadLink[0] === '/' ? sourceWebsite + downloadLink : downloadLink,
         fileFormat,
-        source: 'zlibrary',
+        source: 'libgen',
         title,
         author,
         imgLink,
         pageCount,
       };
+
       //Process strings and trim any unnecessary white space
       Object.keys(ebookInfo).forEach((key) => {
         if (typeof ebookInfo[key] === 'string') {
@@ -85,8 +97,6 @@ function scrapeZLibrary(ebookName, headers, bookIndex) {
 
       //Return EbookResource with info
       resolve(new EbookResource(ebookInfo));
-
-      //
     } catch (error) {
       if (
         error.message.split(':') &&
@@ -103,4 +113,4 @@ function scrapeZLibrary(ebookName, headers, bookIndex) {
   });
 }
 
-module.exports = scrapeZLibrary;
+module.exports = scrapeLibgen;

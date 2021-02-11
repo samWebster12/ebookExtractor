@@ -19,6 +19,7 @@ async function loadCheerio(url, someHeaders) {
 
     return cheerioLoad;
   } catch (error) {
+    console.log('URL: ' + url);
     throw error;
     //  throw new Error('NETWORK: unable to reach url');
   }

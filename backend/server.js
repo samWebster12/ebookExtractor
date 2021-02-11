@@ -2,8 +2,8 @@ const express = require('express');
 const path = require('path');
 const getEbooksController = require('./controllers/getEbooks');
 const signInController = require('./controllers/signIn');
-const verifyTokenController = require('./controllers/verifyToken');
-const User = require('./models/user');
+const authDataController = require('./controllers/authData');
+const verifyFuncs = require('./middleware/verify');
 
 //SETUP
 const PORT = 8080;
@@ -31,14 +31,18 @@ server.use(express.json());
 server.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*'); //'http://localhost:3000'
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, Origin, X-Requested-With, Accept',
+  );
   next();
 });
 
 //ROUTES
-server.get('/api/verify', verifyTokenController);
-server.post('/api/signin', signInController);
-server.post('/api/ebooks', getEbooksController);
+
+server.post('/api/authdata', verifyFuncs.verify, authDataController);
+server.post('/api/signin', verifyFuncs.signinVerify, signInController);
+server.post('/api/ebooks', verifyFuncs.verify, getEbooksController);
 
 //LISTEN
 server.listen(PORT, () => {
